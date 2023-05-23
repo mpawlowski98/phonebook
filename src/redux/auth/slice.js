@@ -1,5 +1,5 @@
 const { createSlice } = require('@reduxjs/toolkit');
-const { signUp } = require('./operations');
+const { signUp, logIn, logOut } = require('./operations');
 
 const initialState = {
   user: { name: null, email: null },
@@ -17,5 +17,17 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.isLoggedIn = true;
     });
+    builder.addCase(logIn.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    });
+    builder.addCase(logOut.fulfilled, state => {
+      state.user = { name: null, email: null };
+      state.token = null;
+      state.isLoggedIn = false;
+    });
   },
 });
+
+export const authReducer = authSlice.reducer;
