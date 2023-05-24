@@ -9,20 +9,12 @@ import {
   loadContacts,
 } from 'redux/contacts/contactsSlice';
 import { useEffect } from 'react';
-import {
-  addContact,
-  deleteContact,
-  fetchContacts,
-} from 'redux/contacts/operations';
+import { addContact, deleteContact } from 'redux/contacts/operations';
 
-export default function Contacts() {
+export const ContactsPage = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(loadContacts());
@@ -57,4 +49,4 @@ export default function Contacts() {
       <ContactList contacts={filteredContacts} onDelete={handleDeleteContact} />
     </div>
   );
-}
+};

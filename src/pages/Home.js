@@ -1,4 +1,4 @@
-export default function Home() {
+export const HomePage = () => {
   return (
     <div>
       <h1>
@@ -9,4 +9,4 @@ export default function Home() {
       </h1>
     </div>
   );
-}
+};

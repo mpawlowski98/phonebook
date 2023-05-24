@@ -1,4 +1,4 @@
-import { addContact, deleteContact, fetchContacts } from './operations';
+import { addContact, deleteContact } from './operations';
 
 const { createSlice } = require('@reduxjs/toolkit');
 
@@ -45,10 +45,10 @@ const contactsSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchContacts.fulfilled, (state, action) => {
-      state.error = null;
-      state.items = action.payload;
-    });
+    // builder.addCase(fetchContacts.fulfilled, (state, action) => {
+    //   state.error = null;
+    //   state.items = action.payload;
+    // });
     builder.addCase(addContact.fulfilled, (state, action) => {
       state.items.push(action.payload);
       saveContactsToLocalStorage(state.contacts);
