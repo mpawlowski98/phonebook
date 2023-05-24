@@ -1,11 +1,13 @@
 import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
-import { selectContacts } from 'redux/contacts/contactsSlice';
 import { useSelector } from 'react-redux';
 import css from 'App.module.css';
+import { selectContacts } from 'redux/contacts/contactsSlice';
+
 function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
   const contacts = useSelector(selectContacts);
 
   const handleChange = event => {

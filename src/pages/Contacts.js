@@ -1,15 +1,16 @@
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectContacts,
   selectFilter,
   setFilter,
+  addContact,
+  deleteContact,
   loadContacts,
 } from 'redux/contacts/contactsSlice';
-import { useEffect } from 'react';
-import { addContact, deleteContact } from 'redux/contacts/operations';
 
 export const ContactsPage = () => {
   const contacts = useSelector(selectContacts);
@@ -20,17 +21,16 @@ export const ContactsPage = () => {
     dispatch(loadContacts());
   }, [dispatch]);
 
-  const handleSubmit = contact => {
-    dispatch(addContact(contact));
-  };
-
   const handleFilterChange = e => {
     dispatch(setFilter(e.target.value));
+  };
+
+  const handleSubmit = contact => {
+    dispatch(addContact(contact));
   };
   const handleDeleteContact = id => {
     dispatch(deleteContact(id));
   };
-
   const getFilteredContacts = () => {
     if (filter) {
       return contacts.filter(({ name }) =>
