@@ -1,5 +1,5 @@
 const { createSlice } = require('@reduxjs/toolkit');
-const { signUp, logIn, logOut } = require('./operations');
+const { logIn, logOut, refreshUser, register } = require('./operations');
 
 const initialState = {
   user: { name: null, email: null },
@@ -12,7 +12,7 @@ const authSlice = createSlice({
   name: `auth`,
   initialState,
   extraReducers: builder => {
-    builder.addCase(signUp.fulfilled, (state, action) => {
+    builder.addCase(register.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
@@ -26,6 +26,17 @@ const authSlice = createSlice({
       state.user = { name: null, email: null };
       state.token = null;
       state.isLoggedIn = false;
+    });
+    builder.addCase(refreshUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+      state.isRefreshing = true;
+    });
+    builder.addCase(refreshUser.pending, state => {
+      state.isRefreshing = true;
+    });
+    builder.addCase(refreshUser.rejected, state => {
+      state.isRefreshing = false;
     });
   },
 });

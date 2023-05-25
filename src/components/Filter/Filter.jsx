@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter, setFilter } from 'redux/contacts/contactsSlice';
 
@@ -9,10 +10,14 @@ function Filter() {
     dispatch(setFilter(e.target.value));
   };
   return (
-    <label>
-      Find contacts by name
-      <input type="text" value={value} onChange={handleChange} />
-    </label>
+    <TextField
+      type="text"
+      value={value}
+      onChange={handleChange}
+      label="Find contacts by name"
+      variant="outlined"
+      fullWidth
+    />
   );
 }
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import css from 'App.module.css';
 import { selectContacts } from 'redux/contacts/contactsSlice';
+import { Button, TextField } from '@mui/material';
 
 function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
@@ -44,35 +45,31 @@ function ContactForm({ onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit} className={css.contactForm}>
-      <label>
-        Name
-        <input
-          className={css.input}
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleChange}
-          title="Name"
-          required
-        />
-      </label>
+      <TextField
+        className={css.input}
+        name="name"
+        value={name}
+        onChange={handleChange}
+        title="Name"
+        label="Name"
+        required
+        variant="outlined"
+      />
 
-      <label>
-        Phone number
-        <input
-          className={css.input}
-          type="tel"
-          name="number"
-          value={number}
-          onChange={handleChange}
-          title="Phone number"
-          required
-        />
-      </label>
+      <TextField
+        className={css.input}
+        name="number"
+        value={number}
+        onChange={handleChange}
+        title="Phone number"
+        required
+        label="Phone number"
+        variant="outlined"
+      />
 
-      <button className={css.addContact} type="submit">
+      <Button type="submit" variant="contained" disableElevation>
         Add contact
-      </button>
+      </Button>
     </form>
   );
 }

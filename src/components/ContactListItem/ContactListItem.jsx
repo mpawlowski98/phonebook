@@ -1,18 +1,25 @@
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contacts/contactsSlice';
+import {
+  Button,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+} from '@mui/material';
 
-function ContactListItem({ name, number, id }) {
-  const dispatch = useDispatch();
-  const handleDelete = () => {
-    dispatch(deleteContact(id));
-  };
+function ContactListItem({ name, number, onDelete }) {
   return (
-    <li>
-      {name}: {number}
-      <button type="button" onClick={handleDelete}>
-        Delete
-      </button>
-    </li>
+    <ListItem>
+      <ListItemText primary={name} secondary={number} />
+      <ListItemSecondaryAction>
+        <Button
+          type="button"
+          variant="contained"
+          disableElevation
+          onClick={onDelete}
+        >
+          Delete
+        </Button>
+      </ListItemSecondaryAction>
+    </ListItem>
   );
 }
 

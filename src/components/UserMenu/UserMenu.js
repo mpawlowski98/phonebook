@@ -1,18 +1,46 @@
 import { useAuth } from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
-import css from './UserMenu.module.css';
+import {
+  Button,
+  Grid,
+  ThemeProvider,
+  Typography,
+  createTheme,
+} from '@mui/material';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
 
+  const theme = createTheme({
+    typography: {
+      welcomeFont: {
+        fontFamily: 'Arial',
+        fontWeight: 300,
+        fontSize: '1.2rem',
+      },
+    },
+  });
+
   return (
-    <div className={css.wrapper}>
-      <p className={css.username}>Welcome, {user.name}</p>
-      <button type="button" onClick={() => dispatch(logOut())}>
-        Logout
-      </button>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item>
+          <Typography variant="welcomeFont">Welcome, {user.name}</Typography>
+        </Grid>
+        <Grid item>
+          <Button
+            color="secondary"
+            type="button"
+            variant="contained"
+            disableElevation
+            onClick={() => dispatch(logOut())}
+          >
+            Logout
+          </Button>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
   );
 };

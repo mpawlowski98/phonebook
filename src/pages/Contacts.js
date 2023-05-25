@@ -11,6 +11,7 @@ import {
   deleteContact,
   loadContacts,
 } from 'redux/contacts/contactsSlice';
+import css from './Contacts.module.css';
 
 export const ContactsPage = () => {
   const contacts = useSelector(selectContacts);
@@ -42,9 +43,9 @@ export const ContactsPage = () => {
   const filteredContacts = getFilteredContacts();
   return (
     <div>
-      <h1>Phonebook</h1>
+      <h1 className={css.tittle}>Phonebook</h1>
       <ContactForm contacts={contacts} onSubmit={handleSubmit} />
-      <h2>Contacts</h2>
+      <h2 className={css.tittle}>Contacts</h2>
       <Filter value={filter} onChange={handleFilterChange} />
       <ContactList contacts={filteredContacts} onDelete={handleDeleteContact} />
     </div>
