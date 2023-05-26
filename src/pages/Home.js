@@ -4,7 +4,7 @@ import { Typography, Box } from '@mui/material';
 export const HomePage = () => {
   return (
     <Box sx={{ textAlign: 'center', marginTop: '50px' }}>
-      <Typography variant="h1" component="h1">
+      <Typography variant="h2" component="h2">
         Contacts manager Welcome page{' '}
         <span role="img" aria-label="Greeting icon">
           📖
